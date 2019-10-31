@@ -1,0 +1,12 @@
+#rodape {
+    min-height: 10vh;
+    background-color: rgb(183, 201, 240);
+    color: rgb(0,0,0);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+    font-size: 10px;
+}

@@ -1,0 +1,34 @@
+#pesquisa {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 20px;
+}
+#input-pesquisa{
+    border: none;
+    outline: none;
+    height:100%;
+    width:200px;
+    border-bottom:1px solid black;
+    transition:0.3s;
+    background-color:rgb(255, 255, 255);
+    opacity: 0.8;
+}
+
+#input-pesquisa:focus {
+    width:300px;
+}
+#resultado-pesquisa a{
+ background-color: red;
+ display: block;
+ width: 100%;
+ text-decoration: none;
+}
+#resultado-pesquisa a:hover{
+background-color: cadetblue;
+}
+#resultado-pesquisa{
+    position: fixed;
+    top: 20px;
+    width: 300px;
+}
