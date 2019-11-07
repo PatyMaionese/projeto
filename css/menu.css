@@ -43,13 +43,21 @@ li {
     padding: 5px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 18px;
-    color: rgb(20, 20, 20);
+    color: rgb(20, 18, 18);
     
 }
 
-li:hover {
-    background-color: rgb(20,20,20);
-    color: white;
+nav li a:hover {
+    background-color: rgb(160, 153, 153);
+    color: rgb(96, 131, 245);
+
+}
+
+nav li a{
+    text-decoration:none;
+    color:black;
+    width:250px;
+    display:inline-block;
 }
 
 #btn-menu:checked + div .span1 {

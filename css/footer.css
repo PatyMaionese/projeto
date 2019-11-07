@@ -1,6 +1,6 @@
 #rodape {
     min-height: 10vh;
-    background-color: rgb(183, 201, 240);
+    background-color: rgb(206, 176, 169);
     color: rgb(0,0,0);
     text-align: center;
     display: flex;
@@ -9,4 +9,5 @@
     justify-content: space-evenly;
     padding: 10px;
     font-size: 10px;
+    
 }

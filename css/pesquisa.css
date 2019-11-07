@@ -19,13 +19,14 @@
     width:300px;
 }
 #resultado-pesquisa a{
- background-color: red;
  display: block;
  width: 100%;
  text-decoration: none;
+ font-family: 'Courier New', Courier, monospace;
+ color:black;
 }
 #resultado-pesquisa a:hover{
-background-color: cadetblue;
+background-color: rgb(232, 240, 252);
 }
 #resultado-pesquisa{
     position: fixed;
