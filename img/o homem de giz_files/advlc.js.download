@@ -1,0 +1,116 @@
+function carregaAdserver(pag){
+	
+	carregaImagensAdserver(pag).done(function(){
+		$("a.lkAdServer").click(function( event ){
+			event.preventDefault();
+			var href = $(this).attr("href");
+			var adv = $(this).attr("value");
+			clickAdserver(adv,href);
+		});
+		
+		if (pag=="menu"){
+			setTimeout(function(){
+				$(".first-menu .toggle-menu").one("mouseenter", function() {
+					var target = $(this).find('.menu-content-container .adv_lc img');
+					target.attr("src",target.attr("data-src"));
+				});
+			}, 1000);
+		}
+	});
+}
+
+function carregaImagensAdserver(pag){
+	
+	var dfr = $.Deferred();
+	var now = new Date();
+	var mes = now.getMonth()+1;
+	if (mes<10) mes="0"+mes;
+	var data = now.getDate();
+	if (data<10) data="0"+data;
+	var hora = now.getHours();
+	if (hora<10) hora="0"+hora;
+	var versao = now.getFullYear()+""+mes+""+data+""+hora;
+	
+	// Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    // Edge 20+
+    var isEdge = !isIE && !!window.StyleMedia;
+	
+	var vtex = false;
+	if (window.location.href.indexOf('myvtex')>0){
+		vtex = true;
+	}
+	
+	var jsonfmt = "json";
+	if (isIE || isEdge){
+		jsonfmt = "jsonp"
+	}
+	
+	$.ajax({
+		url:"//statics.livrariacultura.net.br/assets/static/js/advlc.json?v=v"+versao,
+		dataType: jsonfmt, // Notice! JSONP <-- P (lowercase)
+		success:function(json){
+			
+			var result = json[pag];
+			var obj = Object.keys(json[pag]);
+			
+			for (y=0; y<obj.length; y++){
+				var zona = obj[y];
+				var objResult = result[obj[y]];
+				
+				for (i=0; i<objResult.length; i++){
+					var urlBanner = objResult[i].url;
+					if (vtex){
+						urlBanner = objResult[i].url_vtex;
+					}
+					if (pag=="menu"){
+						$(".adv_lc#"+pag+"-"+zona+"-"+i).html('<a href="'+urlBanner+'" value="'+objResult[i].id+'" class="lkAdServer"><img data-src="'+objResult[i].imagem+'" alt="'+objResult[i].titulo+'" src=""></a>');
+					}else{
+						$(".adv_lc#"+pag+"-"+zona+"-"+i).html('<a href="'+urlBanner+'" value="'+objResult[i].id+'" class="lkAdServer"><img src="'+objResult[i].imagem+'" alt="'+objResult[i].titulo+'"></a>');
+						if ($(".adv_lc_mobile").length > 0){
+							$(".adv_lc_mobile#"+pag+"-"+zona+"-"+i).html('<a href="'+urlBanner+'" value="'+objResult[i].id+'" class="lkAdServer"><img src="'+objResult[i].mobile+'" alt="'+objResult[i].titulo+'"></a>');
+						}
+					}
+				}
+				
+			}
+
+			dfr.resolve();
+		},
+		error:function(){
+			//alert("Error");
+		}      
+	});
+	return $.when(dfr).done(function(){
+		// tasks are done
+	}).promise();
+	
+}
+
+function clickAdserver(adv,url){
+	var ip = dataLayer[0].visitorIP;
+	$.ajax({
+		type: "POST",
+		url: "https://servicos.livrariacultura.com.br/adserver/",
+		data: {
+			adv: adv,
+			ip: ip
+		},
+		success:function(result){
+			setCookieAdserver("adv_lc", adv, 1);
+			window.location = url;
+		},
+		error:function(){
+			window.location = url;
+		}      
+	});
+	
+	return false;
+}
+
+function setCookieAdserver(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}

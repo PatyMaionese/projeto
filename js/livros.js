@@ -1,7 +1,8 @@
 let livros = [
     {
         title: "Atormentada",
-        link: "./Atormentada.html"
+        link: "./Atormentada.html",
+        img: ""
     },
     {
         title: "Crepúsculo",

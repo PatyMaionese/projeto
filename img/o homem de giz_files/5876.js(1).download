@@ -1,0 +1,576 @@
+var lmdPageType, lmdItemId, lmdItemName;
+/** 
+ * Este script contem funções genéricas que serão compartilhadas em todos os outros scripts 
+ */
+
+(function() {
+var _lmd_advertiser_id = 5876;
+if (_lmd_advertiser_id<=0 || _lmd_advertiser_id>=9999) {
+	document.querySelectorAll('[src*=lomadee]').forEach(function(o,i) {
+		var url = o.src;
+		if (url.indexOf('secure.lomadee.com/vtex/')>-1 || url.indexOf('secure.lomadee.com/a/')>-1 || url.indexOf('secure.lomadee.com/tray/')>-1) {
+			_lmd_advertiser_id = url.split('?')[0].replace('https://','').replace('http://','').replace('.js','').replace('secure.lomadee.com/vtex/','').replace('secure.lomadee.com/a/','').replace('secure.lomadee.com/tray/','');
+	    }
+	});
+}
+
+var _lmd_core = {
+
+    _isnull : function(obj) {
+        if (typeof obj === 'undefined') {
+            return true;
+        } else if (obj==null) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    /** Retorna valor de parâmetro da querystring */
+    _qsp : function(paramName) {
+        if (this._isnull(paramName)) {
+            return "";
+        }
+
+        var _lmd_match = RegExp('[?&]' + paramName + '=([^&]*)','i').exec(window.location.search);
+	    return _lmd_match && decodeURIComponent(_lmd_match[1].replace(/\+/g, ' '));
+    },
+
+    /** Retorna o domínio raiz do site atual */
+    _domain : function() {
+        if (location.hostname.indexOf('www.')==0) {
+            return location.hostname.replace('www.','');
+        } else if (location.hostname.indexOf('shop.')==0) {
+            return location.hostname.replace('shop.','');
+        } else if (location.hostname.indexOf('lojas.')==0) {
+            return location.hostname.replace('lojas.','');
+        } else {
+            return location.hostname;
+        }
+    },
+
+    /** Cria elemento invisível no final do body da página */
+    _celmt : function(url, id, type) {
+        if (this._isnull(url)) {
+            return false;
+        }
+
+        if (this._isnull(id)) {
+            id = '_lmd_tk_' + new Date().getTime();
+        }
+        if (this._isnull(type)) {
+            type = 'iframe';
+        }
+        
+        var _lmd_elmt=document.createElement(type);
+		_lmd_elmt.src=url;
+		_lmd_elmt.id=id;							
+		_lmd_elmt.style='display:none';
+		_lmd_elmt.frameBorder = 0;
+		_lmd_elmt.width = "0";
+        _lmd_elmt.height = "0";
+        
+        document.getElementsByTagName('body')[0].appendChild(_lmd_elmt);
+        
+        return true;
+    },
+
+    /** Cria entrada no cookie */
+    _cck : function(cookieName, value, domain, expiresDays, path) {
+        if (this._isnull(cookieName) || this._isnull(value)) {
+            return;
+        }
+        
+        var cookieValue = cookieName + '=' + value;
+        if (!this._isnull(domain)) {
+            cookieValue += ';domain=' + domain;
+        }
+        if (!this._isnull(expiresDays)) {
+            var d = new Date();
+            d.setTime(d.getTime() + (expiresDays*24*60*60*1000));
+            cookieValue += ';expires=' + d.toUTCString();
+        }
+        if (!this._isnull(path)) {
+            cookieValue += ';path=' + path;
+        }
+
+        document.cookie = cookieValue;
+    },
+
+    /** Consulta entrada no cookie */
+    _gck : function(cookieName) {
+        var name = cookieName + "=";
+        var decodedCookie = "";
+        try{
+            decodedCookie = decodeURIComponent(unescape(document.cookie));
+        }catch(e){
+            try{
+                decodedCookie = decodeURIComponent(document.cookie);
+            }catch(e2){}
+        }
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    },
+    
+    _contains : function(target, data) {
+        if (data.toLowerCase().indexOf(target.toLowerCase()) == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+    /** Retorna o lmdsid se existir */
+    _lmdsid : function() {
+        if (this._isnull(this._qsp('lmdsid'))) {
+            return '';
+        } else {
+            return this._qsp('lmdsid');
+        } 
+    },
+
+    /** Retorna o gclid se existir */
+    _gclid : function() {
+        if (this._isnull(this._qsp('gclid'))) {
+            return '';
+        } else {
+            return this._qsp('gclid');
+        } 
+    },
+
+    /** Retorna o utm_source se existir */
+    _utm_source : function() {
+        if (this._gclid()!='' && this._lmdsid()=='') {
+            return 'google_anuncio';
+        } else if(!this._isnull(this._qsp('lmd_src'))){
+            if (this._isnull(this._qsp(this._qsp('lmd_src')))){
+                return '';
+            } else {
+                return this._qsp(this._qsp('lmd_src'));
+            }
+        } else if(_lmd_advertiser_id == 6152){
+            if(this._isnull(this._qsp('affiliate'))){
+                return '';
+            }else{
+                return this._qsp('affiliate');
+            }
+       	} else if(_lmd_advertiser_id == 5630){
+       		if(this._isnull(this._qsp('crfetp_ed'))){
+                return '';
+            } else {
+            	return this._qsp('crfetp_ed');
+            }
+        } else if (this._isnull(this._qsp('utm_source'))) {
+            return '';
+        } else {
+            return this._qsp('utm_source');
+        } 
+    },
+
+    /** Retorna o utm_source se existir */
+    _utm_campaign : function() {
+        if (this._isnull(this._qsp('utm_campaign'))) {
+            return '';
+        } else {
+            return this._qsp('utm_campaign');
+        } 
+    },
+
+    /** 
+     * Retorna o referer, considerando os seguintes valores: 
+        * organic : origem google, bing ou yahoo
+        * direct : tráfego sem referer
+        * same : tráfego interno, isto é, veio de outra página do próprio site
+        * lomadee : tráfego de origem lomadee
+        * buscape : tráfego de origem do buscapé
+        * paid : tráfego pago de outras origens
+     */
+    _referrer : function() {
+        var ref = document.referrer;
+        if (this._isnull(ref)) {
+            ref = '';
+        }
+
+        if (this._contains('lomadee.com', ref) || this._lmdsid()!='' || this._contains('lomadee', this._utm_source())) {
+            return "lomadee";
+        } else if ( (this._contains('google.com', ref) && this._gclid()=='') || this._contains('bing.com', ref) || this._contains('yahoo.com', ref)) {
+            return "organic";
+        } else if (this._gclid()!='') {
+            return "google_paid";
+        } else if (!this._isnull(this._utm_source()) && this._utm_source()!='') {
+            return "paid";
+        } else if (this._contains(this._domain(), ref)) {
+            return "same";
+        } else {
+            return "direct";
+        }
+    },
+
+    /** Configura a latência das lojas que são diferentes de 30 dias */
+    _adv_latency : function() {
+        if (_lmd_advertiser_id==6078) {
+            return 7;
+        } else {
+            return 30;
+        }
+    },
+
+    /** Sempre retorna um valor válido */
+    _gval : function(v) {
+        if (this._isnull(v)) {
+            return '';
+        } else {
+            return v;
+        }
+    },
+    
+    /** Anunciantes que geram a pixel v1 por conta própria, isto é, não gerarão a v1 pela v2 */
+    _advs_that_autogenerate_v1 : function() {
+        var advs = [11,27,158,5545,5576,5632,5644,5714,5717,5736,
+            5754,5755,5756,5766,5772,5777,5783,5787,5840,5856,5860,
+            5866,5876,5896,5902,5925,5947,5948,5951,5960,5961,5966,5986,
+            6003,6007,6008,6009,6011,6012,6015,6020,6026,6028,6032,6035,
+            6036,6041,6043,6046,6058,6066,6071,6097];
+        
+        return advs.indexOf(_lmd_advertiser_id) != -1;
+    }
+
+
+}
+
+
+/** 
+ * A função desse script é realizar todo o procedimento necessário para gerenciar a origem do tráfego 
+ * 
+ * Objetivo técnico:
+ *      - Criar os cookies: lmd, lmd_cj, lmd_orig no domínio da loja
+ *      - Realizar o processo de recoveryLink quando fizer sentido
+ *      - Seta o consumerjorney no dominio lomadee
+ * 
+ * Processos realizados:
+ *      - Se o referrer for lomadee, cria o cookie lmd_cj para lomadee
+ *      - Se o referrer for lomadee e existir o parâmetro lmdsid, cria o cookie lmd com o lmdsid 
+ *          e chama em um iframe do validator pra fazer o processo do recoveryLinks
+ *      - Se o tráfego vier do buscapé, força o afiliado compshopbuscape@buscapecompany.com
+ *      - Se o tráfego vier de midia paga que não faz parte do grupo buscapé,
+ *          set o cookie lmd_cj com o nome da midia
+ *      - Se o tráfego não for interno, seta o cookie lmd_orig com o valor do referrer
+ */
+ 
+	/** Verifica o tipo de trafego */
+	try {
+		/** verifica se o trafego nao eh interno, se possui origem e se nao eh primeiro trafego*/
+		if(_lmd_core._referrer() != 'same' && _lmd_core._utm_source() != '' && _lmd_core._gck('lmd_orig') != ''){
+			if((!_lmd_core._isnull(window.frameElement)?window.frameElement.nodeName == "IFRAME":top != self)){
+				/** verifica se houve troca de atribuicao */
+				if(_lmd_core._utm_source().toLowerCase() != _lmd_core._gck('lmd_cj').toLowerCase()){
+					/** verifica se é mesma origem - level 3 */
+					if(window.frameElement!=null){
+						_lmd_core._celmt(
+				            "https://secure.lomadee.com/"+_lmd_advertiser_id+"/atf.png"+
+				            "?r=" + encodeURIComponent(window.btoa(_lmd_core._referrer())) + 
+				            "&u=" + encodeURIComponent(window.btoa(_lmd_core._utm_source()))+
+				            "&or=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_orig')))+ 
+				            "&ou=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_cj')))+ 
+				            "&o=" + encodeURIComponent(window.btoa(window.parent.location.href))+ 
+				            "&t=" + encodeURIComponent(window.btoa(window.location))+ 
+				            "&l=3",
+				            'lmd_aft',
+				            'img'
+				        );
+					/** verifica se esta no mesmo dominio - level 3 */
+					}else if (!_lmd_core._isnull(document.location.ancestorOrigins) && _lmd_core._contains(_lmd_core._domain(), document.location.ancestorOrigins[0])){
+						_lmd_core._celmt(
+				            "https://secure.lomadee.com/"+_lmd_advertiser_id+"/atf.png"+
+				            "?r=" + encodeURIComponent(window.btoa(_lmd_core._referrer())) + 
+				            "&u=" + encodeURIComponent(window.btoa(_lmd_core._utm_source()))+ 
+				            "&or=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_orig')))+ 
+				            "&ou=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_cj')))+
+				            "&o=" + encodeURIComponent(window.btoa(document.location.ancestorOrigins[0]))+ 
+				            "&t=" + encodeURIComponent(window.btoa(window.location))+ 
+				            "&l=3",
+				            'lmd_aft',
+				            'img'
+				        );
+					/** verifica se o iframe é invisivel - level 2 */
+					}else if(window.innerWidth < 300 || window.innerHeight < 80) {
+						_lmd_core._celmt(
+				            "https://secure.lomadee.com/"+_lmd_advertiser_id+"/atf.png"+
+				            "?r=" + encodeURIComponent(window.btoa(_lmd_core._referrer())) + 
+				            "&u=" + encodeURIComponent(window.btoa(_lmd_core._utm_source()))+ 
+				            "&or=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_orig')))+ 
+				            "&ou=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_cj')))+
+				            "&o=" + encodeURIComponent(window.btoa((!_lmd_core._isnull(document.location.ancestorOrigins)?document.location.ancestorOrigins[0]:"anonimo")))+ 
+				            "&t=" + encodeURIComponent(window.btoa(window.location))+ 
+				            "&l=2",
+				            'lmd_aft',
+				            'img'
+				        );
+				        
+					/** iframe é visivel - level 1 */
+					}else{
+						_lmd_core._celmt(
+				            "https://secure.lomadee.com/"+_lmd_advertiser_id+"/atf.png"+
+				            "?r=" + encodeURIComponent(window.btoa(_lmd_core._referrer())) + 
+				            "&u=" + encodeURIComponent(window.btoa(_lmd_core._utm_source()))+ 
+				            "&or=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_orig')))+ 
+				            "&ou=" + encodeURIComponent(window.btoa(_lmd_core._gck('lmd_cj')))+
+				            "&o=" + encodeURIComponent(window.btoa((!_lmd_core._isnull(document.location.ancestorOrigins)?document.location.ancestorOrigins[0]:"anonimo")))+ 
+				            "&t=" + encodeURIComponent(window.btoa(window.location))+ 
+				            "&l=1",
+				            'lmd_aft',
+				            'img'
+				        );
+					}
+					
+					
+				}
+			}
+		}
+	} catch(e) {}
+
+ /** Verifica se a origem do tráfego foi lomadee */
+ try {
+	 if (_lmd_core._referrer()=='lomadee') {
+	
+	    /** Verifica se existe um lmdsid */
+	    if (_lmd_core._lmdsid()!='') {
+	        /** Adiciona um iframe para validar se o usuário possui um cookie relacionado a esse click */
+	        _lmd_core._celmt(
+	            'https://validator.lomadee.com/validator?aid='+_lmd_advertiser_id+
+	                '&sid='+_lmd_core._lmdsid().split('-')[0]+
+	                '&url='+encodeURIComponent(location.href)+
+	                '&force=false',
+	            'lmd_validator',
+	            'iframe'
+	        );
+	        /** Cria/atualiza cookie da loja com a informação do afiliado e data do click */
+            _lmd_core._cck('lmd', _lmd_core._lmdsid() + "-" + new Date().getTime(), _lmd_core._domain(), _lmd_core._adv_latency(), "/");
+	    }
+	
+	    /** Cria cookie no domínio da loja contendo as informações  */
+	    _lmd_core._cck('lmd_cj', 'lomadee', _lmd_core._domain(), _lmd_core._adv_latency(), "/");
+	 }
+ } catch(e) {}
+
+/** Verifica se a origem é diferente é de outra midia paga */
+try {
+	if (_lmd_core._referrer()=='paid' || _lmd_core._referrer()=='google_paid') {
+	    /** Cria cookie no domínio da loja contendo as informações da origem */
+	    _lmd_core._cck('lmd_cj', _lmd_core._utm_source(), _lmd_core._domain(), _lmd_core._adv_latency(), "/");
+	
+	    /** Cria iframe do consumerjorney para setar o cj do cookie lomadee com a origem do tráfego */
+	    _lmd_core._celmt(
+	        'https://validator.lomadee.com/consumerjorney?aid='+_lmd_advertiser_id+
+	            '&utm='+_lmd_core._utm_source()+
+	            '&url='+encodeURIComponent(location.href),
+	        'lmd_cj_px',
+	        'img'
+	    );
+	}
+} catch(e) {}
+
+/** Verifica se a origem é diferente de same, isto é, não é tráfego interno */
+try {
+	if (_lmd_core._referrer()!='same') {
+	    /** Cria cookie no domínio da loja contendo as informações da origem */
+	    _lmd_core._cck('lmd_orig', _lmd_core._referrer(), _lmd_core._domain(), _lmd_core._adv_latency(), "/");
+	    
+	    /** Cria cookie no domínio da loja contendo as ultimas 4 origens */
+	    if(_lmd_core._gck('lmd_traf') == ''){
+		    _lmd_core._cck('lmd_traf', (_lmd_core._referrer()=='paid'?_lmd_core._utm_source():_lmd_core._referrer())+'-'+new Date().getTime(), _lmd_core._domain(), _lmd_core._adv_latency(), "/");
+	    }else{
+	    	var _lmd_origins_traf = _lmd_core._gck('lmd_traf')+'&'+(_lmd_core._referrer()=='paid'?_lmd_core._utm_source():_lmd_core._referrer())+'-'+new Date().getTime();
+	    	var _lmd_origins_traf_list = _lmd_origins_traf.split('&'); 
+	    	if(_lmd_origins_traf_list.length > 4){
+	    		_lmd_origins_traf_list.shift();
+	    		_lmd_origins_traf = _lmd_origins_traf_list.join('&');
+	    	}
+	    	_lmd_core._cck('lmd_traf',_lmd_origins_traf, _lmd_core._domain(), _lmd_core._adv_latency(), "/");
+	    }
+
+	}
+} catch(e) {}
+
+/** Cria variável com a origem do tráfego */
+var lmd_orig_traffic 	= _lmd_core._gck('lmd_orig');
+var lmd_sid_traffic 	= _lmd_core._gck('lmd');
+var lmd_cj_traffic 		= _lmd_core._gck('lmd_cj');
+var lmd_last_traffic	= _lmd_core._gck('lmd_traf');
+/**
+ * Este script define as regras para implementação da pixel cpa
+ * 
+ * Objetivos técnicos:
+ *      - Montar e imprimir a pixel v1 e v2 de transação da lomadee (CPA, CPL e CPC)
+ * 
+ * Processos realizados:
+ *      - Aguarda o carregamento do datalayer da lomadee
+ *      - Verifica se a página em que o script esta sendo impresso representa a página de checkout
+ *      - Imprime a pixel de transação da lomadee
+ */
+
+ /** Quantidade de tentativas realizadas para encontrar o datalayer */
+ var _lmd_action_tentative = 0;
+
+ function _lmd_action() {
+    /** Número máximo de tentativas antes de desistir de encontrar o datalayer */
+    var maxTentatives = 500;
+    
+    /** Tempo de espera antes de realizar mais 1 tentativa de encontrar o datalayer */
+    var timeout = 150;
+
+    /** Incrementa o número de tentativas realizadas */
+    _lmd_action_tentative++;
+
+    /** Verifica se não ultrapassou a quantidade máxima de tentativas */
+    if (_lmd_action_tentative<maxTentatives) {
+    
+        /** Verifica se o datalayer não existe */
+        if (typeof lomadee_datalayer == 'undefined' || lomadee_datalayer==null || _lmd_core._isnull(lomadee_datalayer)) {
+        
+            /** Realiza mais uma tentativa após periodo de timeout */
+            setTimeout(_lmd_action, timeout);
+            
+        } else {
+        
+            /** Verifica se o datalayer não esta completo */
+            if (_lmd_core._isnull(lomadee_datalayer.page)) {
+            
+                /** Realiza mais uma tentativa após periodo de timeout */
+                setTimeout(_lmd_action, timeout);
+                
+            /** Verifica se página atual é a página de conversão */
+            } else if (lomadee_datalayer.page=='conversion') {
+            
+            		                /*Se nao for girafa*/
+	                if(_lmd_advertiser_id != 5727){
+	                    try {
+	                        _lmd_core._celmt('https://redir.lomadee.com/secure.html?utm_source=' + lmd_orig_traffic + '&utm_campaign=' + lmd_sid_traffic + '&utm_medium=' + location.hostname + '&utm_path=' + encodeURIComponent(location.pathname), 'pixel_analytics', 'iframe');
+	                    } catch(e) {}
+	                }
+                
+                /** Verifica se o atributo conversion não esta preenchido */
+                if (_lmd_core._isnull(lomadee_datalayer.conversion)) {
+                
+                    /** Realiza mais uma tentativa após periodo de timeout */
+                    setTimeout(_lmd_action, 100);
+                    
+                } else {
+                
+                    /** Imprime pixel de transação */
+                    _lmd_action_print();
+                    
+                }
+            }
+        }
+    } 
+ }
+
+/** Inicia o processo de validação do datalayer e impressão da pixel */
+setTimeout(_lmd_action, 1000);
+
+function _lmd_action_print() {
+	if(_lmd_advertiser_id == 1){
+		lomadee_datalayer.conversion.items[0].price = lomadee_datalayer.conversion.amount;
+		lomadee_datalayer.conversion.items[0].quantity = 1;
+	}
+    /** Imprime pixel v2 */
+    _printLomadeePixelV2();
+}
+
+function _printLomadeePixelV2() {
+    /** Imprime image pixel da tag v2 */
+    _lmd_core._celmt(
+        "//secure.lomadee.com/v2.png?" + _lomadeeGetQueryStringV2(),
+        "lmdcpa_v2",
+        "img"
+    );
+}
+
+/** Monta a querystring com os dados da transação */
+function _lomadeeGetQueryStringV2() {
+    var conversion = lomadee_datalayer.conversion;
+    var currency = _lmd_core._gval(conversion.currency);
+    var transaction = _lmd_core._gval(conversion.transactionId);
+    var paymentType = _lmd_core._gval(conversion.paymentType);
+    var type = _lmd_core._gval(lomadee_datalayer.type)=='' ? 'cpa' : lomadee_datalayer.type;
+    var items = _lomadeeGetItensV2(conversion,type);
+    var lmdsid = lmd_sid_traffic;
+    var lmdcj = lmd_cj_traffic;
+    var lmdorig = lmd_orig_traffic;
+    
+    /* Remove cookie do trafego */
+    _lmd_core._cck('lmd_traf', '', _lmd_core._domain(), -1, "/");  
+    
+    return "lmdaId=" + _lmd_advertiser_id + 
+        "&currency=" + currency + 
+        "&paymentType=" + paymentType + 
+        "&orderId=" + transaction + 
+        items +
+        "&type=" + type +
+        "&lmdsid=" + lmdsid +
+        "&lmdcj="+ lmdcj +
+        "&lmdorig="+ lmdorig +
+        "&origin=lmd" +
+        "&lmdtraf="+encodeURIComponent(lmd_last_traffic);
+}
+
+function _lomadeeGetItensV2( conversion, type){
+	var discountItem = 0;
+	if(conversion.hasOwnProperty('discount')){
+		var qtdTotItens = 0;
+		for (var cont=0; cont<conversion.items.length; cont++){
+			qtdTotItens += conversion.items[cont].quantity;
+		}
+		
+		discountItem = conversion.discount/qtdTotItens;
+		
+	}
+	
+	return _lomadeeItensToProd(conversion,discountItem, type);
+	
+}
+
+function _lomadeeItensToProd( conversion, discountItem, type ){
+	var prods = '';
+	/** Realiza o processo para geração da pixel CPA */
+    if (type=='cpa') {
+		var items = _lmd_core._gval(conversion.items);
+		for(var i = 0; i < items.length; i++){
+			prods += '&prod=' + 
+					 encodeURIComponent(items[i].sku) + ';' +
+					 encodeURIComponent(items[i].category) + ';' +
+					 encodeURIComponent(items[i].price - discountItem) + ';' +
+					 encodeURIComponent(items[i].quantity) + ';' +
+					 encodeURIComponent(items[i].name);
+		}
+	/** Realiza o processo para geração da pixel CPL */
+    } else if (type=='cpl') {
+		prods += '&prod=' + conversion.transactionId + ';'+conversion.eventId+';0;1;LEAD';
+	/** Realiza o processo para geração da pixel CPL */
+    } else if (type=='cpc') {
+        /** Ainda não esta sendo utilizado e precisa ser implementado */
+    }
+	
+	return prods;
+}
+
+/***/
+try {
+	_lmd_core._celmt('//secure.lomadee.com/r/'+_lmd_advertiser_id+'.js?origin=' + (lmd_orig_traffic=='lomadee' ? 'lomadee' : lmd_orig_traffic=='google_paid' ? 'google' : lmd_orig_traffic=='paid' || lmd_orig_traffic=='same' ? 'other' : lmd_orig_traffic), '', 'script');
+} catch(e) {}
+
+/** codigo obfuscado no site: https://obfuscator.io/ 
+	var _0x538e=['b3RoZXI=','c2NyaXB0','X2NlbG10','Ly9zZWN1cmUubG9tYWRlZS5jb20vci8=','LmpzP29yaWdpbj0=','bG9tYWRlZQ==','Z29vZ2xlX3BhaWQ=','cGFpZA==','c2FtZQ=='];(function(_0x5635c8,_0x1c485b){var _0x20b480=function(_0x4d3777){while(--_0x4d3777){_0x5635c8['push'](_0x5635c8['shift']());}};var _0x1bfa7c=function(){var _0x5bc841={'data':{'key':'cookie','value':'timeout'},'setCookie':function(_0x2023c8,_0x229d92,_0x493795,_0x3214ae){_0x3214ae=_0x3214ae||{};var _0x1aa5ef=_0x229d92+'='+_0x493795;var _0x40a8f8=0x0;for(var _0x40a8f8=0x0,_0x189266=_0x2023c8['length'];_0x40a8f8<_0x189266;_0x40a8f8++){var _0x3a93d8=_0x2023c8[_0x40a8f8];_0x1aa5ef+=';\x20'+_0x3a93d8;var _0x204cdd=_0x2023c8[_0x3a93d8];_0x2023c8['push'](_0x204cdd);_0x189266=_0x2023c8['length'];if(_0x204cdd!==!![]){_0x1aa5ef+='='+_0x204cdd;}}_0x3214ae['cookie']=_0x1aa5ef;},'removeCookie':function(){return'dev';},'getCookie':function(_0xda3f7f,_0x25159c){_0xda3f7f=_0xda3f7f||function(_0x6c7109){return _0x6c7109;};var _0x379ddf=_0xda3f7f(new RegExp('(?:^|;\x20)'+_0x25159c['replace'](/([.$?*|{}()[]\/+^])/g,'$1')+'=([^;]*)'));var _0x5b967d=function(_0x1a8af4,_0x36dc6b){_0x1a8af4(++_0x36dc6b);};_0x5b967d(_0x20b480,_0x1c485b);return _0x379ddf?decodeURIComponent(_0x379ddf[0x1]):undefined;}};var _0x33cf0a=function(){var _0x2ea01d=new RegExp('\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*[\x27|\x22].+[\x27|\x22];?\x20*}');return _0x2ea01d['test'](_0x5bc841['removeCookie']['toString']());};_0x5bc841['updateCookie']=_0x33cf0a;var _0x5cf21c='';var _0x3ebc4b=_0x5bc841['updateCookie']();if(!_0x3ebc4b){_0x5bc841['setCookie'](['*'],'counter',0x1);}else if(_0x3ebc4b){_0x5cf21c=_0x5bc841['getCookie'](null,'counter');}else{_0x5bc841['removeCookie']();}};_0x1bfa7c();}(_0x538e,0x110));var _0x4b9b=function(_0x58789d,_0x442980){_0x58789d=_0x58789d-0x0;var _0x29f837=_0x538e[_0x58789d];if(_0x4b9b['nhsLwV']===undefined){(function(){var _0x2911d8=function(){var _0x2fb44b;try{_0x2fb44b=Function('return\x20(function()\x20'+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x11a499){_0x2fb44b=window;}return _0x2fb44b;};var _0x2dd724=_0x2911d8();var _0x1c4522='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x2dd724['atob']||(_0x2dd724['atob']=function(_0x30050b){var _0x5544aa=String(_0x30050b)['replace'](/=+$/,'');for(var _0x1a66bf=0x0,_0x1d8199,_0x58625f,_0x388ed2=0x0,_0x2bc3a7='';_0x58625f=_0x5544aa['charAt'](_0x388ed2++);~_0x58625f&&(_0x1d8199=_0x1a66bf%0x4?_0x1d8199*0x40+_0x58625f:_0x58625f,_0x1a66bf++%0x4)?_0x2bc3a7+=String['fromCharCode'](0xff&_0x1d8199>>(-0x2*_0x1a66bf&0x6)):0x0){_0x58625f=_0x1c4522['indexOf'](_0x58625f);}return _0x2bc3a7;});}());_0x4b9b['AojaYL']=function(_0xe2de5d){var _0x27628d=atob(_0xe2de5d);var _0x2eae0c=[];for(var _0x3584ab=0x0,_0x15521e=_0x27628d['length'];_0x3584ab<_0x15521e;_0x3584ab++){_0x2eae0c+='%'+('00'+_0x27628d['charCodeAt'](_0x3584ab)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x2eae0c);};_0x4b9b['ESitTb']={};_0x4b9b['nhsLwV']=!![];}var _0x940176=_0x4b9b['ESitTb'][_0x58789d];if(_0x940176===undefined){var _0x32cee9=function(_0x579cb9){this['jmwNGO']=_0x579cb9;this['dXuLIp']=[0x1,0x0,0x0];this['ESdhRZ']=function(){return'newState';};this['TsZMGg']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*';this['Myoppl']='[\x27|\x22].+[\x27|\x22];?\x20*}';};_0x32cee9['prototype']['LEANNd']=function(){var _0x39caa6=new RegExp(this['TsZMGg']+this['Myoppl']);var _0x482e4e=_0x39caa6['test'](this['ESdhRZ']['toString']())?--this['dXuLIp'][0x1]:--this['dXuLIp'][0x0];return this['RiQtbG'](_0x482e4e);};_0x32cee9['prototype']['RiQtbG']=function(_0x560dab){if(!Boolean(~_0x560dab)){return _0x560dab;}return this['FuBthC'](this['jmwNGO']);};_0x32cee9['prototype']['FuBthC']=function(_0x2e2985){for(var _0x92483d=0x0,_0x469d37=this['dXuLIp']['length'];_0x92483d<_0x469d37;_0x92483d++){this['dXuLIp']['push'](Math['round'](Math['random']()));_0x469d37=this['dXuLIp']['length'];}return _0x2e2985(this['dXuLIp'][0x0]);};new _0x32cee9(_0x4b9b)['LEANNd']();_0x29f837=_0x4b9b['AojaYL'](_0x29f837);_0x4b9b['ESitTb'][_0x58789d]=_0x29f837;}else{_0x29f837=_0x940176;}return _0x29f837;};var _0xee357=function(){var _0x3aa0f9=!![];return function(_0x24d803,_0x3e831b){var _0x15ce6b=_0x3aa0f9?function(){if(_0x3e831b){var _0x347e62=_0x3e831b['apply'](_0x24d803,arguments);_0x3e831b=null;return _0x347e62;}}:function(){};_0x3aa0f9=![];return _0x15ce6b;};}();var _0x4a7470=_0xee357(this,function(){var _0x2e6b3f=function(){return'\x64\x65\x76';},_0x17b152=function(){return'\x77\x69\x6e\x64\x6f\x77';};var _0x4e2620=function(){var _0x4c11c4=new RegExp('\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d');return!_0x4c11c4['\x74\x65\x73\x74'](_0x2e6b3f['\x74\x6f\x53\x74\x72\x69\x6e\x67']());};var _0x283016=function(){var _0x2adea2=new RegExp('\x28\x5c\x5c\x5b\x78\x7c\x75\x5d\x28\x5c\x77\x29\x7b\x32\x2c\x34\x7d\x29\x2b');return _0x2adea2['\x74\x65\x73\x74'](_0x17b152['\x74\x6f\x53\x74\x72\x69\x6e\x67']());};var _0x4abb30=function(_0x200c3e){var _0x315968=~-0x1>>0x1+0xff%0x0;if(_0x200c3e['\x69\x6e\x64\x65\x78\x4f\x66']('\x69'===_0x315968)){_0x3dc4f3(_0x200c3e);}};var _0x3dc4f3=function(_0x276c85){var _0x15d050=~-0x4>>0x1+0xff%0x0;if(_0x276c85['\x69\x6e\x64\x65\x78\x4f\x66']((!![]+'')[0x3])!==_0x15d050){_0x4abb30(_0x276c85);}};if(!_0x4e2620()){if(!_0x283016()){_0x4abb30('\x69\x6e\x64\u0435\x78\x4f\x66');}else{_0x4abb30('\x69\x6e\x64\x65\x78\x4f\x66');}}else{_0x4abb30('\x69\x6e\x64\u0435\x78\x4f\x66');}});_0x4a7470();try{_lmd_core[_0x4b9b('0x0')](_0x4b9b('0x1')+_lmd_advertiser_id+_0x4b9b('0x2')+(lmd_orig_traffic==_0x4b9b('0x3')?'lomadee':lmd_orig_traffic==_0x4b9b('0x4')?'google':lmd_orig_traffic==_0x4b9b('0x5')||lmd_orig_traffic==_0x4b9b('0x6')?_0x4b9b('0x7'):lmd_orig_traffic),'',_0x4b9b('0x8'));}catch(_0x341a0c){}
+*/
+
+})();
