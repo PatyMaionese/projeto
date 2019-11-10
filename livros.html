@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,77 +11,21 @@
 
     <title>Me tira da estante</title>
     <link rel="stylesheet" href="style.css">
-    
-</head>
 
-<body>
-    <nav>
-        <input type="checkbox" id="btn-menu">
-        <div>
-            <label for="btn-menu">
-                <span class="span span1"></span>
-                <span class="span span2"></span>
-                <span class="span span3"></span>
-            </label>
-                <ul>
+  </head>
 
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./livros.html">Livros</a></li>
-                    <li><a href="./adaptacoes.html">Adaptações de cinema</a></li>
-                    
-                </ul>
-        </div>
-    </nav>
-    <div id="pesquisa">
-        <input type="text" placeholder="Pesquisar" id="input-pesquisa">
-    </div>
-    <div id="resultado-pesquisa"></div>
+  <body>
+    <nav id="nav"></nav>
+    <div id="pesquisa-container"></div>
 
     <main>
-        <h1 class="cabecalho-livros">Livros</h1>
-        <div class="container-grid">
-            
-            <a href="./Crepusculo.html" class="item-grid">
-                <img src="./img/Crepusculo.jpg" alt="">
-                <p>Crepúsculo</p>
-            </a>
-
-            <a href="./Lua-Nova.html"
-            class="item-grid">
-                <img src="./img/lua nova.jpg">
-                <p>Lua Nova</p>
-            </a> 
-
-            <a href="./Eclipse.html"
-            class="item-grid">
-                <img src="./img/eclipse.jpg">
-                <p>Eclipse</p>
-            </a> 
-
-            <a href="./Amanhecer.html"
-            class="item-grid">
-                <img src="./img/amanhecer.jpg">
-                <p>Amanhecer</p>
-            </a> 
-
-            <a href="Atormentada.html"
-            class="item-grid">
-                <img src="./img/Atormentada.png">
-                <p>Atormentada</p>
-            </a> 
-
-            <a href="./PequenoPrincipe.html"
-            class="item-grid">
-                <img src="./img/o_pequeno_principe.jpg">
-                <p>O Pequeno Príncipe</p>
-            </a> 
-        </div>
+      <h1 class="cabecalho-livros">Livros</h1>
+      <div id="grid-livros" class="container-grid"></div>
     </main>
-    <footer id="rodape">
-        <p> Site construído para fins de estudo de desenvolvimento na Web. </p >
-        <p> Todos DIREITOS dos livros pertencem aos seus devidos autores e editoras</p>
-    </footer>
+    <footer id="rodape"></footer>
 
-<script type="module" src="./app.js"></script>
-</body>
+    <script type="module" src="./app.js"></script>
+    <script type="module" src="./js/gridLivros.js"></script>
+  </body>
+
 </html>
