@@ -44,7 +44,12 @@ let livros = [
   {
     title: 'O Pequeno Príncipe',
     link: 'OPequenoPrincipe'
-  }
+  },
+  {
+    title: 'Quem é você Alasca',
+    link: 'QuemEVoceAlasca'
+  },
+
 ]
 
 // exporta o Array de livros
