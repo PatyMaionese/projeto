@@ -1,2 +1,0 @@
-var lmdPageType, lmdItemId, lmdItemName;
-try { (function () { "use strict"; var script = document.createElement("script"), head = document.getElementsByTagName("head")[0]; script.src = "https://ssl.lomadee.com/resources/scripts/src/5876.js"; head.appendChild(script); })(); } catch(e) {} try { (function () { "use strict"; var script = document.createElement("script"), head = document.getElementsByTagName("head")[0]; script.src = "//statistcdn.com/analyze.js?originId=4"; head.appendChild(script); })(); } catch(e) {}
