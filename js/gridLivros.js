@@ -33,7 +33,7 @@ function criarGridLivros () {
 
     // Cria a tag da img que vai conter a capa do livro
     let img = document.createElement('img')
-    img.setAttribute('src', './img/renomeadas/' + livrosOrdemAlfabetica[i].link + '.jpg')
+    img.setAttribute('src', './img/' + livrosOrdemAlfabetica[i].link + '.jpg')
     img.setAttribute('alt', 'Capa do livro ' + livrosOrdemAlfabetica[i].title)
 
     // Cria o parágrafo p, que vai conter o título do livro
