@@ -42,10 +42,6 @@ let livros = [
     link: 'LuaNova'
   },
   {
-    title: 'O Pequeno Príncipe',
-    link: 'OPequenoPrincipe'
-  },
-  {
     title: 'Quem é você Alasca',
     link: 'QuemEVoceAlasca'
   },
@@ -82,8 +78,8 @@ let livros = [
     link: 'AindaSouEu'
   },
   {
-    title: '',
-    link: ''
+    title: 'Alice No País Das Maravilhas',
+    link: 'AliceNoPaisDasMaravilhas'
   },
   {
     title: 'Alita Anjo Do Combate',
@@ -106,8 +102,8 @@ let livros = [
     link: 'AsVantagensDeSerInvisivel'
   },
   {
-    title: 'As Viagens De Gulliever',
-    link: 'AsViagensDeGulliever'
+    title: 'As Viagens De Gulliver',
+    link: 'AsViagensDeGulliver'
   },
   {
     title: 'A Teoria De Tudo',
@@ -174,8 +170,8 @@ let livros = [
     link: 'GodOfWar2'
   },
   {
-    title: 'Harry Potte E A Câmara Secreta',
-    link: 'HarryPotteEACamaraSecreta'
+    title: 'Harry Potter E A Câmara Secreta',
+    link: 'HarryPotterEACamaraSecreta'
   },
   {
     title: 'Harry Potter E A Ordem Da Fênix',
@@ -217,8 +213,129 @@ let livros = [
     title: 'Medicina Dos Horrores',
     link: 'MedicinaDosHorrores'
   },
+  {
+    title: 'Morte E A Vida De Charlie',
+    link: 'MorteEAVidaDeCharlie'
+  },
+  {
+    title: 'Mulher De Preto 2',
+    link: 'MulherDePreto2'
+  },
+  {
+    title: 'Na Própria Carne',
+    link: 'NaPropriaCarne'
+  },
+  {
+    title: 'No Coração Do Mar',
+    link: 'NoCoracaoDoMar'
+  },
+  {
+    title: 'O Cemitério Maldito',
+    link: 'OCemiterioMaldito'
+  },
+  {
+    title: 'O Homem De Giz',
+    link: 'OHomemDeGiz'
+  },
+  {
+    title: 'O Labirinto Do Fauno',
+    link: 'OLabirintoDoFauno'
+  },
+  {
+    title: 'O Livro Da Selva',
+    link: 'OLivroDaSelva'
+  },
+  {
+    title: 'O Mágico De Oz',
+    link: 'OMagicoDeOz'
+  },
+  {
+    title: 'O Menino Do Pijama Listrado',
+    link: 'OMeninoDoPijamaListrado'
+  },
+  {
+    title: 'O Pequeno Príncipe',
+    link: 'OPequenoPrincipe'
+  },
+  {
+    title: 'O Príncipe Coreano',
+    link: 'OPrincipeCoreano'
+  },
+  {
+    title: 'O Que Aconteceu Com Annie',
+    link: 'OQueAconteceuComAnnie'
+  },
+  {
+    title: 'Os Três Mosqueteiros',
+    link: 'OsTresMosqueteiros'
+  },
+  {
+    title: 'Os Treze Porquês',
+    link: 'OsTrezePorques'
+  },
+  {
+    title: 'Para Onde Ela Foi',
+    link: 'ParaOndeElaFoi'
+  },
+  {
+    title: 'Peter Pan',
+    link: 'PeterPan'
+  },
+  {
+    title: 'Quarto',
+    link: 'Quarto'
+  },
+  {
+    title: 'Quatro Vidas De Um Cachorro',
+    link: 'QuatroVidasDeUmCachorro'
+  },
+  {
+    title: 'Romeu E Julieta',
+    link: 'RomeuEJulieta'
+  },
+  {
+    title: 'Se Eu Ficar',
+    link: 'SeEuFicar'
+  },
+  {
+    title: 'Seja Líde De Você Mesmo',
+    link: 'SejaLiderDeVoceMesmo'
+  },
+  {
+    title: 'Tristão E Isolda',
+    link: 'TristaoEIsolda'
+  },
+  {
+    title: 'As Crônicas De Narnia A Cadeira De Prata',
+    link: 'AsCronicasDeNarniaACadeiraDePrata'
+  },
+  {
+    title: 'As Crônicas De Narnia A Última Batalha',
+    link: 'AsCronicasDeNarniaAUltimaBatalha'
+  },
+  {
+    title: 'As Crônicas De Narnia A Viagem Do Peregrino Da',
+    link: 'AsCronicasDeNarniaAViagemDoPeregrinoDaAlvorada'
+  },
+  {
+    title: 'As Crônicas De Narnia O Cavalo E Seu Menino',
+    link: 'AsCronicasDeNarniaOCavaloESeuMenino'
+  },
+  {
+    title: 'As Crônicas De Narnia O Leão, A Feiticeira E O Guarda Roupa',
+    link: 'AsCronicasDeNarniaOLeaoAFeiticeiraEOGuardaRoupa'
+  },
+  {
+    title: 'As Crônicas De Narnia O Príncipe Caspian',
+    link: 'AsCronicasDeNarniaOPrincipeCaspian'
+  },
+  {
+    title: 'As Crônicas De Narnia O Sobrinho Do Mago',
+    link: 'AsCronicasDeNarniaOSobrinhoDoMago'
+  },
 
 ]
 
 // exporta o Array de livros
 export { livros }
+
