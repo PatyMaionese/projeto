@@ -333,6 +333,273 @@ let livros = [
     title: 'As Crônicas De Narnia O Sobrinho Do Mago',
     link: 'AsCronicasDeNarniaOSobrinhoDoMago'
   },
+  {
+    title: 'A Fúria E A Aurora',
+    link: 'AFuriaEAAurora'
+  },
+  {
+    title: 'A Garota Que Lia As Estrelas',
+    link: 'AGarotaQueLiaAsEstrelas'
+  },
+  {
+    title: 'Agora E Para Sempre Lara Jean',
+    link: 'AgoraEParaSempreLaraJean'
+  },
+  {
+    title: 'Antes De Partir',
+    link: 'AntesDePartir'
+  },
+  {
+    title: 'A Pequena Livraria Dos Corações Solitários',
+    link: 'APequenaLivrariaDosCoracoesSolitarios'
+  },
+  {
+    title: 'A Rosa E A Adaga',
+    link: 'ARosaEAAdaga'
+  },
+  {
+    title: 'A Sereia',
+    link: 'ASereia'
+  },
+  {
+    title: 'As Regras Do Amor E Da Magia',
+    link: 'AsRegrasDoAmorEDaMagia'
+  },
+  { 
+    title: 'Contos De A Fúria E A Aurora',
+    link: 'ContosDeAFuriaEAAurora'
+  },
+  {
+    title: 'Corte De Asas E Ruína',
+    link: 'CorteDeAsasERuina'
+  },
+
+  {
+    title: 'Corte De Espinhos E Rosas',
+    link: 'CorteDeEspinhosERosas'
+  },
+  {
+    title: 'Corte De Gelo E Estrelas',
+    link: 'CorteDeGeloEEstrelas'
+  },
+  {
+    title: 'Corte De Névoa E Fúria',
+    link: 'CorteDeNevoaEFuria'
+  },
+  {
+    title: 'Crônicas De Amor E Ódio The Beauty Of Darkness',
+    link: 'CronicasDeAmorEOdioTheBeautyOfDarkness'
+  },
+  {
+    title: 'Crônicas De Amor E ódio The Heart Of Betrayal',
+    link: 'CronicasDeAmorEOdioTheHeartOfBetrayal'
+  },
+
+  {
+    title: 'Crônicas De Amor E Ódio The Kiss Of Deception',
+    link: 'CronicasDeAmorEOdioTheKissOfDeception'
+  },
+  {
+    title: 'Diário Do Vampiro A Fúria',
+    link: 'DiarioDoVampiroAFuria'
+  },
+  {
+    title: 'Diário Do Vampiro Anoitecer',
+    link: 'DiarioDoVampiroAnoitecer'
+  },
+  {
+    title: 'Diário Do Vampiro Meia Noite',
+    link: 'DiarioDoVampiroMeiaNoite'
+  },
+  {
+    title: 'Diário Do Vampiro O Confronto',
+    link: 'DiarioDoVampiroOConfronto'
+  },
+
+  {
+    title: 'Diário Do Vampiro O Despertar',
+    link: 'DiarioDoVampiroODespertar'
+  },
+  {
+    title: 'Diário Do Vampiro Reunião Sombria',
+    link: 'DiarioDoVampiroReuniaoSombria'
+  },
+  {
+    title: 'Gaia A Roda Da Vida',
+    link: 'GaiaARodaDaVida'
+  },
+  {
+    title: 'Laço Eterno',
+    link: 'LacoEterno'
+  },
+  {
+    title: 'Minha Vida Não Tão Perfeita',
+    link: 'MinhaVidaNaoTaoPerfeita'
+  },
+
+  {
+    title: 'Muitas Águas',
+    link: 'MuitasAguas'
+  },
+  {
+    title: 'Mulher Com Branquias',
+    link: 'MulherComBranquias'
+  },
+  {
+    title: 'Para Sempre Alice',
+    link: 'ParaSempreAlice'
+  },
+  {
+    title: 'Para Todos Garotos Que Já Amei',
+    link: 'ParaTodosGarotosQueJaAmei'
+  },
+  {
+    title: 'Perigosa Amizade - O Começo',
+    link: 'PerigosaAmizadeOComeco'
+  },
+  {
+    title: 'Perto O Bastante Para Tocar',
+    link: 'PertoOBastanteParaTocar'
+  },
+
+  {
+    title: 'Por Trás Das Flores Murchas',
+    link: 'PorTrasDasFloresMurchas'
+  },
+  {
+    title: 'P.S Ainda Amo Você',
+    link: 'PSAindaAmoVoce'
+  },
+  {
+    title: 'P.S Eu Te Amo',
+    link: 'PSEuTeAmo'
+  },
+  {
+    title: 'Quando A Noite Cai',
+    link: 'QUandoANoiteCai'
+  },
+  {
+    title: 'Tartarugas Até Lá Em Baixo',
+    link: 'TartarugasAteLaEmBaixo'
+  },
+
+  {
+    title: 'Uma Curva No Tempo',
+    link: 'UmaCurvaNoTempo'
+  },
+  {
+    title: 'Uma Dobra No Tempo',
+    link: 'UmaDobraNoTempo'
+  },
+  {
+    title: 'Um Planeta Em Seu Giro Veloz',
+    link: 'UmPlanetaEmSeuGiroVeloz'
+  },
+  {
+    title: 'Um Tempo Aceitável',
+    link: 'UmTempoAceitavel'
+  },
+  {
+    title: 'Vento À Porta',
+    link: 'VentoAPorta'
+  },
+
+  {
+    title: '',
+    link: ''
+  },
+
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+
+  {
+    title: '',
+    link: ''
+  },
+
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+  {
+    title: '',
+    link: ''
+  },
+
+
+  
 
 ]
 
