@@ -1,15 +1,27 @@
 #sinopse {
     text-align: justify;
-    position: absolute;
+    font-size:20px;
+    padding:10px;
+    margin:70px 0;
+}
 
+#sinopse h3 {
+    text-align:center;
+    margin:10px 0;
+    font-size:25px;
 }
 
 #img {
-   
-    position: absolute;
-    top:0;
-    left: calc(50% - 100px);
-
+   margin:70px auto;
 }
 
-main{}
+@media screen and (min-width:800px){
+    #sinopse{ 
+        display:inline-block;
+        width:calc(100vw - 400px);
+    }
+    #img {
+        display:inline-block;
+        margin:70px;
+     }
+}
