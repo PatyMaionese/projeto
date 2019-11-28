@@ -505,13 +505,13 @@ let livros = [
   },
 
   {
-    title: '',
-    link: ''
+    title: '500 Dias Sem Voçê',
+    link: '500DiasSemVoce'
   },
 
   {
-    title: '',
-    link: ''
+    title: 'A Princesa Salva A Si Mesma',
+    link: 'APrincesaSalvaASiMesma'
   },
   {
     title: '',
