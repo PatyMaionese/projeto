@@ -298,8 +298,8 @@ let livros = [
     link: 'SeEuFicar'
   },
   {
-    title: 'Seja Líde De Você Mesmo',
-    link: 'SejaLiderDeVoceMesmo'
+    title: 'Seja Líder De Si Mesmo',
+    link: 'SejaLiderDeSiMesmo'
   },
   {
     title: 'Tristão E Isolda',
@@ -514,80 +514,112 @@ let livros = [
     link: 'APrincesaSalvaASiMesma'
   },
   {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 1: Toque Do Queijo',
+    link: '1DiarioDeUmBananaToqueDoQueijo'
   },
   {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 2: Rodrick É O Cara',
+    link: '2DiarioDeUmBananaRodrickEOCara'
   },
   {
-    title: '',
-    link: ''
+    title: "Diário De Um Banana 3: A Gota D' Água",
+    link: '3DiarioDeUmBananaAGotaDAgua'
   },
   {
-    title: '',
-    link: ''
-  },
-
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 4: Dias De Cão',
+    link: '4DiarioDeUmBananaDiasDeCao'
   },
 
   {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 5: A Verdade Nua E Crua',
+    link: '5DiarioDeUmBananaAVerdadeNuaECrua'
+  },
+  {
+    title: 'Diário De Um Banana  6: Casa Dos Horrores',
+    link: '6DiarioDeUmBananaACasaDosHorrores'
+  },
+  {
+    title: 'Diário De Um Banana 7: Segurando Vela',
+    link: '7DiarioDeUmBananaSegurandoVela'
+  },
+  {
+    title: 'Diário De Um Banana 8: Maré De Azar ',
+    link: '8DiarioDeUmBananaMareDeAzar'
+  },
+  {
+    title: 'Diário De Um Banana 9: Caindo Na Estrada',
+    link: '9DiarioDeUmBananaCaindoNaEstrada'
   },
 
   {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
-  },
-  {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 10: Bons Tempos',
+    link: '10DiarioDeUmBananaBonsTempos'
   },
 
   {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 11: Vai Ou Racha ',
+    link: '11DiarioDeUmBananaVaiOuRacha'
   },
   {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 12: Apertem Os Cintos',
+    link: '12DiarioDeUmBananaApertemOsCintos'
   },
   {
-    title: '',
-    link: ''
+    title: 'Diário De Um Banana 13: Batalha Neval',
+    link: '13DiarioDeUmBananaBatalhaNeval'
+  },
+  {
+    title: 'Diário De Um Banana 14: Quebra Tudo',
+    link: '14DiarioDeUmBananaQuebraTudo'
+  },
+  {
+    title: 'Acampamento Shadow Falls Desperta Ao Amanhecer',
+    link: 'AcampamentoShadowFallsDespertaAoAmanhecer'
+  },
+
+  {
+    title: 'Acampamento Shadow Falls Escolhida Ao Anoitecer',
+    link: 'AcampamentoShadowFallsEscolhidaAoAnoitecer'
+  },
+  {
+    title: 'Acampamento Shadow Falls Levada Ao Entardecer',
+    link: 'AcampamentoShadowFallsLevadaAoEntardecer'
+  },
+  {
+    title: 'Acampamento Shadow Falls Nascida Á Meia-Noite',
+    link: 'AcampamentoShadowFallsNascidaAMeiaNoite'
+  },
+  {
+    title: 'Acampamento Shadow Falls Sussurros Ao Anoitecer',
+    link: 'AcampamentoShadowFallsSussurosAoAnoitecer'
+  },
+  {
+    title: 'A Coroa',
+    link: 'ACoroa'
+  },
+  {
+    title: 'A Elite',
+    link: 'AElite'
+  },
+  {
+    title: 'A Escolha',
+    link: 'AEscolha'
+  },
+  {
+    title: 'A Garota Do Lago',
+    link: 'AGarotaDoLago'
+  },
+  {
+    title: 'A Herdeira',
+    link: 'AHerdeira'
+  },
+  {
+    title: 'Animais Fantásticos E Onde Habitam',
+    link: 'AnimaisFantasticosEOndeHabitam'
+  },
+  {
+    title: 'Animais Fantásticos Os Crimes De Grindelwald',
+    link: 'AnimaisFantasticosOsCrimesDeGrindelwald'
   },
   {
     title: '',
