@@ -510,8 +510,8 @@ let livros = [
   },
 
   {
-    title: 'A Princesa Salva A Si Mesma',
-    link: 'APrincesaSalvaASiMesma'
+    title: 'A Princesa Salva A Si Mesma Neste Livro',
+    link: 'APrincesaSalvaASiMesmaNesteLivro'
   },
   {
     title: 'Diário De Um Banana 1: Toque Do Queijo',
@@ -590,8 +590,8 @@ let livros = [
     link: 'AcampamentoShadowFallsNascidaAMeiaNoite'
   },
   {
-    title: 'Acampamento Shadow Falls Sussurros Ao Anoitecer',
-    link: 'AcampamentoShadowFallsSussurosAoAnoitecer'
+    title: 'Acampamento Shadow Falls Sussurros Ao Luar',
+    link: 'AcampamentoShadowFallsSussurrosAoLuar'
   },
   {
     title: 'A Coroa',
@@ -622,15 +622,151 @@ let livros = [
     link: 'AnimaisFantasticosOsCrimesDeGrindelwald'
   },
   {
-    title: '',
-    link: ''
+    title: 'Antes Que Eu Vá',
+    link: 'AntesQueEuVa'
   },
+  {
+    title: 'Apaixonados',
+    link: 'Apaixonados'
+  },
+  {
+    title: 'A Pequena Livraria Dos Sonhos',
+    link: 'APequenaLivrariaDosSonhos'
+  },
+  {
+    title: 'A Seleção',
+    link: 'ASelecao'
+  },
+
+  {
+    title: 'Deixada Para Trás',
+    link: 'DeixadaParaTras'
+  },
+
+  {
+    title: 'Dezenove Luas',
+    link: 'DezenoveLuas'
+  },
+
+  {
+    title: 'Dezesseis Luas',
+    link: 'DezesseisLuas'
+  },
+
+  {
+    title: 'Dezessete Luas',
+    link: 'DezesseteLuas'
+  },
+
+  {
+    title: 'Dezoito Luas',
+    link: 'DezoitoLuas'
+  },
+
+  {
+    title: 'Eu Estive Aqui',
+    link: 'EuEstiveAqui'
+  },
+
+  {
+    title: 'Eu Perdi O Rumo',
+    link: 'EuPerdiORumo'
+  },
+
+  {
+    title: 'Êxtase',
+    link: 'Extase'
+  },
+
+  {
+    title: 'Fallen',
+    link: 'Fallen'
+  },
+
+  {
+    title: 'Felizes Para Sempre',
+    link: 'FelizesParaSempre'
+  },
+
+  {
+    title: 'Não Confie Em Ninguém',
+    link: 'NaoConfieEmNinguem'
+  },
+
+  {
+    title: 'O Maravilhoso Agora',
+    link: 'OMaravilhosoAgora'
+  },
+  {
+    title: 'O Mau Exemplo De Cameron',
+    link: 'OMauExemploDeCameronPost'
+  },
+
+  {
+    title: 'O Que Há De Estranho Em Mim',
+    link: 'OQueHaDeEstranhoEmMim'
+  },
+
+  {
+    title: 'Os Irmãos Karamázov',
+    link: 'OsIrmaosKaramazov'
+  },
+  {
+    title: 'Os Miseráveis',
+    link: 'OsMiseraveis'
+  },
+
+  {
+    title: 'O Sol Também É Uma Estrela',
+    link: 'OSolTambemEUmaEstrela'
+  },
+
+  {
+    title: 'Paixão',
+    link: 'Paixao'
+  },
+  {
+    title: 'Para Onde Vou',
+    link: 'ParaOndeVou'
+  },
+
+  {
+    title: 'Quase Cinderela',
+    link: 'QuaseCinderela'
+  },
+
+  {
+    title: 'Simplesmente Acontece',
+    link: 'SimplesmenteAcontece'
+  },
+  {
+    title: 'Todo Dia',
+    link: 'TodoDia'
+  },
+
+  {
+    title: 'Tormenta',
+    link: 'Tormenta'
+  },
+
+  {
+    title: 'Tudo E Todas As Coisas',
+    link: 'TudoETodasAsCoisas'
+  },
+  {
+    title: 'A Garota Da Capa Vermelha',
+    link: 'AGarotaDaCapaVermelha'
+  },
+
   {
     title: '',
     link: ''
   },
 
-
+  {
+    title: '',
+    link: ''
+  },
   
 
 ]
