@@ -32,4 +32,6 @@ background-color: rgb(232, 240, 252);
     position: fixed;
     top: 20px;
     width: 300px;
+    background-color: rgb(207, 234, 252);
+    z-index: 10;
 }
