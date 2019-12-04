@@ -757,16 +757,6 @@ let livros = [
     title: 'A Garota Da Capa Vermelha',
     link: 'AGarotaDaCapaVermelha'
   },
-
-  {
-    title: '',
-    link: ''
-  },
-
-  {
-    title: '',
-    link: ''
-  },
   
 
 ]
