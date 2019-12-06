@@ -476,7 +476,7 @@ let livros = [
   },
   {
     title: 'Quando A Noite Cai',
-    link: 'QUandoANoiteCai'
+    link: 'QuandoANoiteCai'
   },
   {
     title: 'Tartarugas Até Lá Em Baixo',

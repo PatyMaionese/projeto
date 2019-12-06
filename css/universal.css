@@ -4,7 +4,6 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-<<<<<<< Updated upstream
 
 #pagina{
     display:flex;
@@ -12,8 +11,8 @@
     justify-content: center;
     min-height: 100vh;
     font-size:30px;
-=======
+}
+
 body{
-    background-color: rgb(135, 209, 243);
->>>>>>> Stashed changes
+    background-color: rgb(130, 184, 200);
 }
