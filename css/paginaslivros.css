@@ -1,11 +1,11 @@
-#sinopse {
+#sinopse, #Criticas {
     text-align: justify;
     font-size:20px;
     padding:10px;
-    margin:70px 0;
+    margin:50px 0;
 }
 
-#sinopse h3 {
+#sinopse h3, #Criticas h3 {
     text-align:center;
     margin:10px 0;
     font-size:25px;
@@ -15,8 +15,17 @@
    margin:70px auto;
 }
 
+#sinopse p, #Criticas p{
+    line-height: 25px;
+    padding: 10px;
+    text-indent: 30px;
+}
+#Criticas{
+   border-top: 1px dashed rgb(0, 0, 0);
+}
+
 @media screen and (min-width:800px){
-    #sinopse{ 
+    #sinopse, #Criticas{ 
         display:inline-block;
         width:calc(100vw - 400px);
     }
@@ -24,4 +33,8 @@
         display:inline-block;
         margin:70px;
      }
+     #Criticas{
+         margin-left: 340px;
+     }
 }
+
