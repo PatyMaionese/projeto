@@ -114,7 +114,7 @@ let livros = [
     link: 'CacadoresDeNazistas'
   },
   {
-    title: 'Carrie',
+    title: 'Carrie,A Estranha',
     link: 'Carrie'
   },
   {
